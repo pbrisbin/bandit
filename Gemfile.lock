@@ -1,0 +1,16 @@
+PATH
+  remote: .
+  specs:
+    bandit (0.0.0)
+      paint
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    paint (0.8.5)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bandit!

@@ -1,0 +1,3 @@
+#!/usr/bin/env ruby
+require 'bandit'
+Bandit::Main.run ARGV
