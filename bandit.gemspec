@@ -15,7 +15,5 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
-  s.licenses      = ["MIT"]
-
-  s.add_runtime_dependency "paint"
+  s.licenses      = ["GPL"]
 end

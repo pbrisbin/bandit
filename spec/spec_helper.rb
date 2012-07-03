@@ -1,4 +1,5 @@
 require 'bandit'
+require 'timecop'
 
 module Bandit
   class MockPlayer
