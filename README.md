@@ -7,27 +7,18 @@ collection.
 
 ### How it works
 
-Bandit does one thing when executed, choose and play an album.
+Bandit does one thing when executed: choose and play an album.
 
-30% of the time, Bandit will choose an album at random (exploration). 
+*Some of the time*, Bandit will choose an album at random (exploration).
 
 Depending on how long you let that album play before invoking Bandit 
-again, a worth will be assigned or adjusted for that album.
+again, that album's "worth" will be adjusted.
 
-The other 70% of the time, Bandit will choose the album which has the 
+*Most of the time*, Bandit will choose the album which has the 
 highest worth at this time (exploitation).
 
-Worth is assigned as follows:
-
-Play time   Adjustment 
-----------  -----------  
-< 2m        -1
-2-10m       +1
-11-60m      +3
->= 60m      +5
-
 Obviously, this means Bandit needs to be used for a while before you see 
-any sort of intelligence.
+any sort of intelligence emerge.
 
 ### Getting started
 
@@ -35,9 +26,26 @@ any sort of intelligence.
 $ git clone https://github.com/pbrisbin/bandit
 $ cd bandit
 $ bundle install
-$ bundle exec bin/bandit # to try it out
-$ rake install # to install for reals
+$ bundle exec bin/bandit  # to just try it out
+$ rake install            # to install for reals
 ~~~
+
+### Configuration
+
+For now, Bandit's behavior/strategy can be configured only by editing 
+`lib/bandit/config.rb` directly.
+
+Player-interaction is accomplished by defining a `Player` subclass and 
+assigning its instance in `config.rb`. You can see how the default 
+`Player::Mpc` is written/used for guidance in writing others.
+
+### Status
+
+Bandit currently *functions*, that is, he chooses albums and makes 
+adjustments according to his specs.
+
+That said, I haven't used it long enough to know if the approach 
+actually *works*.
 
 [albumbler]: https://github.com/keenerd/albumbler
 [mab]:       https://en.wikipedia.org/wiki/Multi-armed_bandit
