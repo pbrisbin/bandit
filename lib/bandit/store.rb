@@ -19,7 +19,7 @@ module Bandit
 
     def self.albums
       pstore.transaction do |store|
-        store[ALBUMS_KEY]
+        store[ALBUMS_KEY] || {}
       end
     end
 
