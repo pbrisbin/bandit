@@ -10,7 +10,7 @@ module Bandit
 
     # Exploration will occur 30% of the time.
     def exploring?
-      rand(100) >= 30
+      rand(100) <= 30
     end
 
     # If you skip within 2 minutes, the album's value will drop by 1. If
