@@ -4,17 +4,22 @@ module Bandit
   describe Store do
     include_context 'tmp-storage'
 
-    it "has accessors" do
+    it "can store last skip" do
       Store.last_skip = t = Time.now
       Store.last_skip.should == t
     end
 
-    it "can be persisted" do
-      Store.last_skip = t = Time.now
+    it "can adjust an album" do
+      Store["Some Album"] ||= 0
+      Store["Some Album"]  += 1
+      Store["Some Album"].should == 1
+    end
 
-      # TODO: simulate a stop/restart
-
-      Store.last_skip.should == t
+    it "can list all albums" do
+      Store["An Album"]      = 1
+      Store["Another Album"] = 2
+      Store.albums.should == { "An Album"      => 1,
+                               "Another Album" => 2 }
     end
   end
 end

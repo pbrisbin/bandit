@@ -1,44 +1,47 @@
-require 'forwardable'
 require 'pstore'
-require 'singleton'
 
 module Bandit
   class Store
-    KEY = 'BanditStorage'
-    ACCESSORS = [:last_skip, :last_album, :albums]
+    LAST_SKIP_KEY = :last_skip
+    ALBUMS_KEY    = :albums
 
-    include Singleton
-
-    class << self
-      extend Forwardable
-      def_delegators :instance, :load, :save, :data
-    end
-
-    ACCESSORS.each do |accessor|
-      class_eval %{
-        def self.#{accessor}
-          data[#{accessor.inspect}]
-        end
-
-        def self.#{accessor}=(value)
-          data[#{accessor.inspect}] = value
-        end
-      }
-    end
-
-    attr_reader :data
-
-    def initialize
-      @pstore = PStore.new(Config.storage)
-      @pstore.transaction(true) do |store|
-        @data = store[KEY] || {}
+    def self.last_skip
+      pstore.transaction do |store|
+        store[LAST_SKIP_KEY]
       end
     end
 
-    def save
-      @pstore.transaction do |store|
-        store[KEY] = @data
+    def self.last_skip=(value)
+      pstore.transaction do |store|
+        store[LAST_SKIP_KEY] = value
       end
     end
+
+    def self.albums
+      pstore.transaction do |store|
+        store[ALBUMS_KEY]
+      end
+    end
+
+    def self.[](key)
+      pstore.transaction do |store|
+        store[ALBUMS_KEY] ||= {}
+        store[ALBUMS_KEY][key]
+      end
+    end
+
+    def self.[]=(key, val)
+      pstore.transaction do |store|
+        store[ALBUMS_KEY] ||= {}
+        store[ALBUMS_KEY][key] = val
+      end
+    end
+
+    def self.pstore
+      @pstore ||= PStore.new(Config.storage)
+    end
+
+    private_class_method :pstore
+
   end
 end
