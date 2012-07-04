@@ -29,7 +29,6 @@ module Bandit
       puts %{ => "#{album}" loaded. }
 
       Store.last_skip = Time.now
-      Store.save
 
     rescue => ex
       $stderr.puts "error: #{ex}"

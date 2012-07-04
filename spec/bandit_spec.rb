@@ -10,9 +10,6 @@ module Bandit
     include_context 'tmp-storage'
 
     before do
-      Store.last_skip = nil
-      Store.albums    = {}
-
       # silence
       Main.stub(:puts)
     end
