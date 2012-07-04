@@ -1,12 +1,10 @@
 require 'spec_helper'
 
 module Bandit
-  describe Scores, 'adjust' do
+  describe Scores do
     include_context 'tmp-storage'
 
     it "should adjust based on thresholds" do
-      puts Store[:albums].inspect
-
       Scores.adjust('foo', 30)
       Store['foo'].should == -1
 
@@ -19,9 +17,7 @@ module Bandit
       Scores.adjust('bat', 60 * 60 + 1)
       Store['bat'].should == 5
     end
-  end
 
-  describe Scores, 'best' do
     it "should choose best" do
       Store['foo'] = 2
       Store['bar'] = 6
