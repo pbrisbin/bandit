@@ -7,6 +7,12 @@ module Bandit
   # we're exploring.
   describe Main, 'run' do
     include_context 'mock-player'
+    include_context 'tmp-storage'
+
+    before do
+      Store.last_skip = nil
+      Store.albums    = {}
+    end
 
     it "should load a new album" do
       previous = player.current
