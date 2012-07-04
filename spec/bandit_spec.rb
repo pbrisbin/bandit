@@ -12,6 +12,9 @@ module Bandit
     before do
       Store.last_skip = nil
       Store.albums    = {}
+
+      # silence
+      Main.stub(:puts)
     end
 
     it "should load a new album" do
