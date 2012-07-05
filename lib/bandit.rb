@@ -25,8 +25,8 @@ module Bandit
       end
 
       Config.player.load(album)
-
-      puts %{ => "#{album}" loaded. }
+      Config.player.show_status ||
+        puts(%{ => "#{album}" loaded. })
 
       Store.last_skip = Time.now
 
