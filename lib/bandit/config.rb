@@ -18,7 +18,7 @@ module Bandit
 
     # Default player uses the mpc binary.
     def self.player
-      @player ||= Player::Mpc.new
+      @player ||= Players::Mpc.new
     end
 
     # Storage is kept in a file in your XDG_CACHE director or a dotfile
