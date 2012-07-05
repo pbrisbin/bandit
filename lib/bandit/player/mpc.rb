@@ -1,7 +1,12 @@
 module Bandit
   class Player::Mpc < Player
     def load(album)
-      `mpc stop; mpc clear; mpc findadd album '#{album}'; mpc play`
+      # sometimes mpc can be flaky, so we'll run separate system
+      # commands so that a failure is caught where it happens.
+      run_system('mpc stop')
+      run_system('mpc clear')
+      run_system("mpc findadd album '#{album}'")
+      run_system('mpc play')
     end
 
     def current
@@ -12,6 +17,10 @@ module Bandit
 
     def albums
       `mpc list album`.split("\n")
+    end
+
+    def show_status
+      system('mpc')
     end
   end
 end

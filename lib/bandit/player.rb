@@ -22,6 +22,23 @@ module Bandit
       unimplemented
     end
 
+    # Print status information to stdout. This is called after a change
+    # to the playlist has been made. Return nil if your player doesn't
+    # support it and Bandit will just output the album it has selected.
+    def show_status
+      nil
+    end
+
+    protected
+
+    # runs a command, hides output, but raises an error if the command
+    # returns non-zero.
+    def run_system(cmd)
+      unless system("#{cmd} &>/dev/null")
+        raise "Command #{cmd.inspect} returned non-zero: #{$?}"
+      end
+    end
+
     private
 
     def unimplemented
