@@ -17,24 +17,26 @@ module Bandit
       end
     end
 
+    # Access the hash of album-values. If block is given, yield this
+    # value (allowing updates) and return the block return value;
+    # otherwise, just return the hash of album-values.
     def self.albums
       pstore.transaction do |store|
-        store[ALBUMS_KEY] || {}
+        store[ALBUMS_KEY] ||= {}
+
+        block_given? ? yield(store[ALBUMS_KEY])
+                     : store[ALBUMS_KEY]
       end
     end
 
-    def self.[](key)
-      pstore.transaction do |store|
-        store[ALBUMS_KEY] ||= {}
-        store[ALBUMS_KEY][key]
-      end
+    # Get the value for the passed album
+    def self.[](album)
+      albums { |a| a[album] }
     end
 
-    def self.[]=(key, val)
-      pstore.transaction do |store|
-        store[ALBUMS_KEY] ||= {}
-        store[ALBUMS_KEY][key] = val
-      end
+    # Set the value for the passed album.
+    def self.[]=(album, val)
+      albums { |a| a[album] = val }
     end
 
     def self.pstore
