@@ -2,7 +2,7 @@ require 'bandit/config'
 require 'bandit/scores'
 require 'bandit/store'
 require 'bandit/player'
-require 'bandit/player/mpc'
+require 'bandit/players/mpc'
 
 module Bandit
   class Main

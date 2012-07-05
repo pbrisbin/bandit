@@ -37,7 +37,7 @@ For now, Bandit's behavior/strategy can be configured only by editing
 
 Player-interaction is accomplished by defining a `Player` subclass and 
 assigning its instance in `config.rb`. You can see how the default 
-`Player::Mpc` is written/used for guidance in writing others.
+`Players::Mpc` is written/used for guidance in writing others.
 
 ### Status
 
