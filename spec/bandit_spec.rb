@@ -9,11 +9,6 @@ module Bandit
     include_context 'mock-player'
     include_context 'tmp-storage'
 
-    before do
-      # silence
-      Main.stub(:puts)
-    end
-
     it "should load a new album" do
       previous = player.current
 

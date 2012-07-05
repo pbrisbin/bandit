@@ -2,7 +2,7 @@ require 'bandit'
 require 'timecop'
 
 module Bandit
-  class MockPlayer
+  class MockPlayer < Player
     attr_reader :current, :albums
 
     def initialize
@@ -15,6 +15,10 @@ module Bandit
     def load(album)
       @current = album
       @playing = true
+    end
+
+    def show_status
+      true
     end
 
     def playing?
